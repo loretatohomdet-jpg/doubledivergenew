@@ -20,6 +20,7 @@ const insights = [
   ['Notes', 'Prototyping as a strategy tool, not a design phase', '5 min'],
 ]
 const paths = [-180, -100, -30, 30, 100, 180]
+const heroHeading = 'Different questions.\nOne Better Possibility'
 
 function Btn({ children, dark }: { children: string; dark?: boolean }) {
   return (
@@ -29,11 +30,19 @@ function Btn({ children, dark }: { children: string; dark?: boolean }) {
   )
 }
 
+function BrandMark() {
+  return (
+    <span className="brand-mark">
+      <span className="font-bold">Double</span><span className="font-normal">Diverge.</span>
+    </span>
+  )
+}
+
 function LandingPage() {
   return (
     <div className="overflow-x-hidden font-sans">
       <nav className="fixed inset-x-3 top-3 z-50 mx-auto flex max-w-6xl items-center justify-between rounded-full border border-ink/10 bg-paper/80 px-5 py-3 shadow-sm backdrop-blur-md">
-        <a href="#" className="font-display text-sm font-bold tracking-[0.2em]">DOUBLE DIVERGE</a>
+        <a href="#" aria-label="Double Diverge home" className="font-display text-lg leading-none"><BrandMark /></a>
         <div className="hidden gap-8 text-sm text-mute md:flex">
           {['Work', 'Approach', 'Insights', 'About'].map((l) => <a key={l} href={`#${l.toLowerCase()}`} className="transition-colors hover:text-ink">{l}</a>)}
         </div>
@@ -43,7 +52,14 @@ function LandingPage() {
       <header className="relative grid min-h-screen items-center gap-10 px-5 pt-28 pb-16 md:grid-cols-12 md:px-12">
         <div className="md:col-span-7">
           <p className="mb-8 text-xs uppercase tracking-[0.3em] text-mute">Technology · Research · Strategy · Innovation</p>
-          <h1 className="font-display text-[13vw] font-bold leading-[0.88] tracking-tight md:text-[7.5vw]">Different questions.<br /><span className="text-signal">Better</span> possibilities</h1>
+          <h1 aria-label="Different questions. One Better Possibility" className="font-display text-[13vw] font-bold leading-[0.88] tracking-tight md:text-[7.5vw]">
+            <span aria-hidden="true">
+              {Array.from(heroHeading).map((character, index) => character === '\n'
+                ? <br key={index} />
+                : <span key={index} className={`typewriter-char ${index >= 25 ? 'text-signal' : ''}`} style={{ animationDelay: `${index * 45}ms` }}>{character}</span>)}
+              <span className="typewriter-cursor" />
+            </span>
+          </h1>
           <p className="mt-10 max-w-lg text-lg leading-relaxed text-mute">Double Diverge explores complex problems, challenges assumptions and turns ideas into practical possibilities through research, strategy and technology.</p>
           <div className="mt-10 flex flex-wrap gap-4"><Btn dark>Explore our work</Btn><Btn>Let's talk</Btn></div>
         </div>
@@ -51,7 +67,7 @@ function LandingPage() {
           <svg viewBox="0 0 500 500" className="h-full w-full">
             {paths.map((d, i) => (
               <path key={i} className="path-draw origin-center transition-all duration-1000 ease-out group-hover:[stroke-width:2.5]" style={{ animationDelay: `${i * 0.15}s` }}
-                d={`M 20 250 C 140 250, 160 ${250 + d}, 250 ${250 + d} S 360 250, 480 250`} fill="none" stroke={i === 2 ? '#ff4d1f' : '#121212'} strokeOpacity={i === 2 ? 1 : 0.35} strokeWidth="1.2" />
+                d={`M 20 250 C 140 250, 160 ${250 + d}, 250 ${250 + d} S 360 250, 480 250`} fill="none" stroke={i === 2 ? 'var(--color-signal)' : '#121212'} strokeOpacity={i === 2 ? 1 : 0.35} strokeWidth="1.2" />
             ))}
             {paths.map((d, i) => <circle key={i} cx="250" cy={250 + d} r="5" className="fill-paper stroke-ink transition-all duration-700 group-hover:fill-signal" strokeWidth="1.2" />)}
             <circle cx="20" cy="250" r="8" className="fill-ink" /><circle cx="480" cy="250" r="8" className="fill-signal" />
@@ -134,7 +150,7 @@ function LandingPage() {
       </section>
 
       <footer className="grid gap-10 border-t border-ink/15 px-5 py-16 text-sm md:grid-cols-4 md:px-12">
-        <div><p className="font-display font-bold tracking-[0.2em]">DOUBLE DIVERGE</p><p className="mt-3 max-w-xs text-mute">Different questions. Better possibilities.</p></div>
+        <div><p className="font-display text-xl leading-none"><BrandMark /></p><p className="mt-3 max-w-xs text-mute">Different questions. Better possibilities.</p></div>
         <div className="space-y-2 text-mute"><p className="text-ink">Studio</p>{['Work', 'Approach', 'Insights', 'About'].map((l) => <a key={l} href={`#${l.toLowerCase()}`} className="block hover:text-ink">{l}</a>)}</div>
         <div className="space-y-2 text-mute"><p className="text-ink">Follow</p>{['LinkedIn', 'X / Twitter', 'Facebook'].map((l) => <a key={l} href="#" className="block hover:text-ink">{l}</a>)}</div>
         <div className="space-y-2 text-mute"><p className="text-ink">Contact</p><p>doublediverge@gmail.com</p><p>Kaduna, Nigeria</p><p className="pt-4 text-xs">© 2026 Double Diverge Ltd</p></div>

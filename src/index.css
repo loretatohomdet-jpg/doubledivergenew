@@ -6,11 +6,34 @@
   --font-sans: "Inter", sans-serif;
   --color-paper: #f5f3ee;
   --color-ink: #121212;
-  --color-signal: #ff4d1f;
+  --color-signal: #6255d8;
   --color-mute: #6b6862;
 }
 
 html { scroll-behavior: smooth; }
 body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-sans); }
+.brand-mark {
+  display: inline-block;
+  background: linear-gradient(100deg, #1456c0 0%, #6255d8 58%, #c656df 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+@keyframes typewriter-appear { to { opacity: 1; } }
+.typewriter-char { opacity: 0; animation: typewriter-appear 1ms steps(1, end) both; }
+.typewriter-cursor {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.78em;
+  margin-left: 0.08em;
+  background: var(--color-signal);
+  vertical-align: -0.04em;
+  animation: typewriter-blink 800ms steps(1, end) infinite;
+}
+@keyframes typewriter-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-char { opacity: 1; animation: none; }
+  .typewriter-cursor { display: none; }
+}
 @keyframes dash { to { stroke-dashoffset: 0; } }
 .path-draw { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: dash 3s ease-out forwards; }
